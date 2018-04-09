@@ -4,14 +4,14 @@
 
 'use strict';
 
-let changeColor = document.getElementById('changeColor');
+let changeColor = document.getElementById('test_veracity');
 chrome.storage.sync.get('color', function(data) {
   changeColor.style.backgroundColor = data.color;
   changeColor.setAttribute('value', data.color);
 });
 
 changeColor.onclick = function(element) {
-  console.log("color chan ged");
+  console.log("color changed");
   let color = element.target.value;
     chrome.tabs.executeScript(
         {code: 'document.body.style.backgroundColor = "' + color + '";'});
