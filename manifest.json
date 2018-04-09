@@ -2,5 +2,10 @@
   "name": "News Analyzer",
   "version": "1.0",
   "description": "Determine how \"real\" news articles are",
+  "permissions": ["storage"],
+  "background": {
+  "scripts": ["background.js"],
+  "persistent": false
+},
   "manifest_version": 2
 }
