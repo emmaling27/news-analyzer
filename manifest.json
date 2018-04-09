@@ -2,10 +2,10 @@
   "name": "News Analyzer",
   "version": "1.0",
   "description": "Determine how \"real\" news articles are",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": ["tabs", "activeTab", "declarativeContent", "storage"],
   "background": {
-  "scripts": ["background.js"],
-  "persistent": false
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "page_action": {
     "default_popup": "popup.html",

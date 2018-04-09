@@ -11,8 +11,9 @@ chrome.storage.sync.get('color', function(data) {
 });
 
 changeColor.onclick = function(element) {
+  console.log("color chan ged");
   let color = element.target.value;
     chrome.tabs.executeScript(
-        tabs[0].id,
         {code: 'document.body.style.backgroundColor = "' + color + '";'});
+
 };
