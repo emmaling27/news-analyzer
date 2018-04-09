@@ -1,0 +1,6 @@
+{
+  "name": "News Analyzer",
+  "version": "1.0",
+  "description": "Determine how \"real\" news articles are",
+  "manifest_version": 2
+}
