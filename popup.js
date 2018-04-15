@@ -4,6 +4,15 @@
 
 'use strict';
 
+function get_news(DOM_content) {
+  console.log('I received the following DOM content:\n' + DOM_content);
+}
+
+function got_tab() {
+  alert("got tab")
+  console.log("got tab")
+}
+
 let changeColor = document.getElementById('test_veracity');
 chrome.storage.sync.get('color', function(data) {
   changeColor.style.backgroundColor = data.color;
@@ -16,4 +25,16 @@ changeColor.onclick = function(element) {
     chrome.tabs.executeScript(
         {code: 'document.body.style.backgroundColor = "' + color + '";'});
 
+        
+        // chrome.tabs.getCurrent(function(tab) {
+        //   tabID = tab.id;
+        //   chrome.tabs.sendMessage(tabID, {text: 'report_back'}, get_news);
+        // });
+        alert("got tab!");
+        // ...check the URL of the active tab against our pattern and...
+        // if (urlRegex.test(tab.url)) {
+            // ...if it matches, send a message specifying a callback too
+
+        // }
+  console.log("message sent")
 };
