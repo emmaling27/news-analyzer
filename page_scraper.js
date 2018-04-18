@@ -9,7 +9,7 @@ webpage and send it to the background for analysis. */
 //     if (msg.text === 'report_back') {
 //         // Call the specified callback, passing
 //         // the web-page's DOM content as argument
-//         sendResponse(document.all[0].outerHTML);
+        // sendResponse(document.all[0].outerHTML);
 //     }
 // });
 
@@ -24,5 +24,6 @@ chrome.runtime.onMessage.addListener(
                 "from a content script:" + sender.tab.url :
                 "from the extension");
     if (request.greeting == "hello")
-      sendResponse({farewell: "goodbye"});
+      // sendResponse({farewell: "goodbye"});
+      sendResponse({farewell: document.all[0].outerHTML});
   });
