@@ -23,7 +23,16 @@ chrome.runtime.onMessage.addListener(
     console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");
-    if (request.greeting == "hello")
+    if (request.msg == "Get html") {
       // sendResponse({farewell: "goodbye"});
-      sendResponse({farewell: document.all[0].outerHTML});
+      sendResponse({response: document.all[0].outerHTML});
+    } else if (request.msg == "Get article") {
+      let paragraphs = document.getElementsByTagName("p");
+      let i = 0;
+      let text = "";
+      for (; i < paragraphs.length; i++) {
+        text += paragraphs[i].innerHTML;
+      }
+      sendResponse({response: text});
+    }
   });
