@@ -52,7 +52,6 @@ div {
 
 #bias {
     text-align: right; /* Right-align text */
-    /* margin-left: 20%; */
     padding-right: 0px; /* Add some right padding */
     line-height: 40px; /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
     color: white; /* White text color */

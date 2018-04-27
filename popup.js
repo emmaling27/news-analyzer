@@ -28,24 +28,31 @@ function sourceMessage(type) {
   return message;
 }
 
-let analyzeArticle = document.getElementById('analyzeArticle');
+function biasMessage(bias) {
+  let message;
+  if (bias == "bias") {
+    message = "This article looks <strong>biased</strong> to us.";
+  }
+  else if (bias == "unsure") {
+    message = "We're <strong>not sure</strong> if this article is biased or impartial, sorry!";
+  }
+  else if (bias == "impartial") {
+    message = "This article looks <strong>impartial</strong> to us.";
+  }
+  return message;
+}
 
-analyzeArticle.onclick = function(element) {
+document.getElementById('analyzeArticle').onclick = function(element) {
   // Show the loader
   document.getElementById("loader").style.display = "block";
-  console.log("clicked");
   let url = "";
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {msg: "Get article"}, function(response) {
       // Print processed html (article to be analyzed) to the console
-      console.log(response.response);
-      console.log("tab URL: " + tabs[0].url);
       url = tabs[0].url;
-      // document.getElementById("demo").innerHTML = "Loading. . .";
       // Send data to Fakebox
       let xhttp = new XMLHttpRequest();
       xhttp.open("POST", "http://localhost:8080/fakebox/check", true);
-      // xhttp.responseType = "json";
       xhttp.setRequestHeader("Accept", "application/json; charset=utf-8");
       xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
       xhttp.send(JSON.stringify({
@@ -61,23 +68,9 @@ analyzeArticle.onclick = function(element) {
           // Show results
           document.getElementById("results").style.display = "block";
           let results = JSON.parse(this.responseText);
-          console.log(results);
           document.getElementById("source").innerHTML = sourceMessage(results.domain.category);
-          let bias = results.content.decision;
-          let message;
-          if (bias == "bias") {
-            message = "This article looks <strong>biased</strong> to us.";
-          }
-          else if (bias == "unsure") {
-            message = "We're <strong>not sure</strong> if this article is biased or impartial, sorry!";
-          }
-          else if (bias == "impartial") {
-            message = "This article looks <strong>impartial</strong> to us.";
-          }
-          document.getElementById("biasText").innerHTML = message;
-          let biasScore = results.content.score;
-          document.getElementById("bias").style.marginLeft = biasScore * 100 + "%";
-          // document.getElementById("demo").innerHTML = this.responseText;
+          document.getElementById("biasText").innerHTML = biasMessage(results.content.decision);
+          document.getElementById("bias").style.marginLeft = results.content.score * 100 + "%";
         }
       };
     });

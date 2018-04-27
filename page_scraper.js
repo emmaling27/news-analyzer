@@ -63,7 +63,6 @@ function processHTML(html) {
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log("adding event listener")
     if (request.msg == "Get html") {
       sendResponse({response: document.all[0].outerHTML});
     } else if (request.msg == "Get article") {
