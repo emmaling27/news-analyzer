@@ -3,10 +3,13 @@
 // found in the LICENSE file.
 
 'use strict';
-
+// Hide the loader
+document.getElementById("loader").style.display = "none";
 let analyzeArticle = document.getElementById('analyzeArticle');
 
 analyzeArticle.onclick = function(element) {
+  // Show the loader
+  document.getElementById("loader").style.display = "block";
   console.log("clicked");
   let url = "";
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -15,7 +18,7 @@ analyzeArticle.onclick = function(element) {
       console.log(response.response);
       console.log("tab URL: " + tabs[0].url);
       url = tabs[0].url;
-      document.getElementById("demo").innerHTML = "Loading. . .";
+      // document.getElementById("demo").innerHTML = "Loading. . .";
       // Send data to Fakebox
       let xhttp = new XMLHttpRequest();
       xhttp.open("POST", "http://localhost:8080/fakebox/check", true);
@@ -29,6 +32,9 @@ analyzeArticle.onclick = function(element) {
       // When Fakebox responds, put Fakebox data in the popup
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          // Hide the loader again
+          document.getElementById("loader").style.display = "none";
+          // Show results
           document.getElementById("demo").innerHTML = this.responseText;
         }
       };
