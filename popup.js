@@ -39,10 +39,22 @@ analyzeArticle.onclick = function(element) {
           document.getElementById("loader").style.display = "none";
           // Show results
           document.getElementById("results").style.display = "block";
-          results = JSON.parse(this.responseText);
-          bias = results.content.decision;
-          document.getElementById("biasText").innerHTML = "Bias: " + bias;
-          biasScore = results.content.score;
+          let results = JSON.parse(this.responseText);
+          console.log(results);
+          document.getElementById("source").innerHTML = "Domain category: " + results.domain.category;
+          let bias = results.content.decision;
+          let message;
+          if (bias == "bias") {
+            message = "This article looks biased to us.";
+          }
+          else if (bias == "unsure") {
+            message = "We're not sure if this article is biased or impartial, sorry!";
+          }
+          else if (bias == "impartial") {
+            message = "This article looks impartial to us.";
+          }
+          document.getElementById("biasText").innerHTML = message;
+          let biasScore = results.content.score;
           document.getElementById("bias").style.marginLeft = biasScore * 100 + "%";
           // document.getElementById("demo").innerHTML = this.responseText;
         }
