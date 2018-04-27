@@ -14,21 +14,22 @@ function got_tab() {
 }
 
 let changeColor = document.getElementById('test_veracity');
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-});
+// chrome.storage.sync.get('color', function(data) {
+//   changeColor.style.backgroundColor = data.color;
+//   changeColor.setAttribute('value', data.color);
+// });
 
 changeColor.onclick = function(element) {
   console.log("color changed");
-  let color = element.target.value;
-    chrome.tabs.executeScript(
-        {code: 'document.body.style.backgroundColor = "' + color + '";'});
+  // let color = element.target.value;
+    // chrome.tabs.executeScript(
+        // {code: 'document.body.style.backgroundColor = "' + color + '";'});
 
       chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {msg: "Get article"}, function(response) {
+        chrome.tabs.sendMessage(tabs[0].id, {msg: "Get html"}, function(response) {
           console.log(response.response);
         });
+        console.log("tab URL: " + tabs[0].url);
       });
       // Put placeholder into the popup html
       document.getElementById("demo").innerHTML = "something";

@@ -10,7 +10,8 @@
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "js": ["page_scraper.js"]
+      "js": ["page_scraper.js"],
+      "run_at": "document_end"
     }
   ],
   "browser_action": {

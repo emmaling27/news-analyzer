@@ -13,6 +13,10 @@ webpage and send it to the background for analysis. */
 //     }
 // });
 
+function processHTML(txt) {
+  return txt;
+}
+
 
 // chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
 //   console.log(response.farewell);
@@ -20,6 +24,7 @@ webpage and send it to the background for analysis. */
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
+    console.log("adding event listener")
     console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");
@@ -35,4 +40,5 @@ chrome.runtime.onMessage.addListener(
       }
       sendResponse({response: text});
     }
+    // return true;
   });
