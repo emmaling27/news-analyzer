@@ -41,17 +41,17 @@ analyzeArticle.onclick = function(element) {
           document.getElementById("results").style.display = "block";
           let results = JSON.parse(this.responseText);
           console.log(results);
-          document.getElementById("source").innerHTML = "Domain category: " + results.domain.category;
+          document.getElementById("source").innerHTML = "Domain category: <strong>" + results.domain.category + "</strong>";
           let bias = results.content.decision;
           let message;
           if (bias == "bias") {
-            message = "This article looks biased to us.";
+            message = "This article looks <strong>biased</strong> to us.";
           }
           else if (bias == "unsure") {
-            message = "We're not sure if this article is biased or impartial, sorry!";
+            message = "We're <strong>not sure</strong> if this article is biased or impartial, sorry!";
           }
           else if (bias == "impartial") {
-            message = "This article looks impartial to us.";
+            message = "This article looks <strong>impartial</strong> to us.";
           }
           document.getElementById("biasText").innerHTML = message;
           let biasScore = results.content.score;
