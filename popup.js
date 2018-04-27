@@ -7,6 +7,27 @@
 document.getElementById("loader").style.display = "none";
 document.getElementById("results").style.display = "none";
 
+function sourceMessage(type) {
+  let message;
+  if (type != "unsure" && type != "unknown") {
+    message = "This source is known for <strong> ";
+    if (type == "bias") {
+      message += "biased";
+    }
+    else if (type == "junksci") {
+      message += "junk science";
+    }
+    else {
+      message += type;
+    }
+    message += "</strong> content.";
+  }
+  else {
+    message = "We don't know much about this source, sorry.";
+  }
+  return message;
+}
+
 let analyzeArticle = document.getElementById('analyzeArticle');
 
 analyzeArticle.onclick = function(element) {
@@ -41,7 +62,7 @@ analyzeArticle.onclick = function(element) {
           document.getElementById("results").style.display = "block";
           let results = JSON.parse(this.responseText);
           console.log(results);
-          document.getElementById("source").innerHTML = "Domain category: <strong>" + results.domain.category + "</strong>";
+          document.getElementById("source").innerHTML = sourceMessage(results.domain.category);
           let bias = results.content.decision;
           let message;
           if (bias == "bias") {
