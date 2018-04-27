@@ -10,10 +10,10 @@ button {
 }
 
 div {
-    padding-top: 15px;
-    padding-right: 5px;
-    padding-bottom: 15px;
-    padding-left: 5px;
+    padding-top: 5px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+    padding-left: 0px;
     margin: auto;
 }
 
@@ -26,9 +26,36 @@ div {
     animation: spin 2s linear infinite;
     padding-right: 15px;
     padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+
+/* Make sure that padding behaves as expected */
+* {box-sizing:border-box}
+
+/* Container for skill bars */
+.container {
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    width: 100%; /* Full width */
+    background: linear-gradient(to right, red, yellow, green);
+}
+
+#bias {
+    text-align: right; /* Right-align text */
+    /* margin-left: 20%; */
+    padding-right: 0px; /* Add some right padding */
+    line-height: 40px; /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
+    color: white; /* White text color */
+    width: 1px;
+    height: 15px;
+    background-color: black;
 }

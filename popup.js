@@ -3,8 +3,10 @@
 // found in the LICENSE file.
 
 'use strict';
-// Hide the loader
+// Hide the loader and bias bar
 document.getElementById("loader").style.display = "none";
+document.getElementById("results").style.display = "none";
+
 let analyzeArticle = document.getElementById('analyzeArticle');
 
 analyzeArticle.onclick = function(element) {
@@ -22,7 +24,8 @@ analyzeArticle.onclick = function(element) {
       // Send data to Fakebox
       let xhttp = new XMLHttpRequest();
       xhttp.open("POST", "http://localhost:8080/fakebox/check", true);
-      xhttp.setRequestHeader("Accept", "application/json; charset=utf-8")
+      // xhttp.responseType = "json";
+      xhttp.setRequestHeader("Accept", "application/json; charset=utf-8");
       xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
       xhttp.send(JSON.stringify({
         "url": url,
@@ -35,7 +38,13 @@ analyzeArticle.onclick = function(element) {
           // Hide the loader again
           document.getElementById("loader").style.display = "none";
           // Show results
-          document.getElementById("demo").innerHTML = this.responseText;
+          document.getElementById("results").style.display = "block";
+          results = JSON.parse(this.responseText);
+          bias = results.content.decision;
+          document.getElementById("biasText").innerHTML = "Bias: " + bias;
+          biasScore = results.content.score;
+          document.getElementById("bias").style.marginLeft = biasScore * 100 + "%";
+          // document.getElementById("demo").innerHTML = this.responseText;
         }
       };
     });
