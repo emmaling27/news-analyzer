@@ -3,16 +3,6 @@ webpage and send it to the background for analysis. */
 
 'use strict';
 
-// // Listen for messages
-// chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-//     // If the received message has the expected format...
-//     if (msg.text === 'report_back') {
-//         // Call the specified callback, passing
-//         // the web-page's DOM content as argument
-        // sendResponse(document.all[0].outerHTML);
-//     }
-// });
-
 // Remove HTML elements from the text, keeping text that is linked
 function processHTML(html) {
   // Initialize all variables, booleans to false
@@ -71,21 +61,13 @@ function processHTML(html) {
   return txt;
 }
 
-
-// chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
-//   console.log(response.farewell);
-// });
-
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log("adding event listener")
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
     if (request.msg == "Get html") {
-      // sendResponse({farewell: "goodbye"});
       sendResponse({response: document.all[0].outerHTML});
     } else if (request.msg == "Get article") {
+      // Get all <p> elements from HTML
       let paragraphs = document.getElementsByTagName("p");
       let i = 0;
       let text = "";
