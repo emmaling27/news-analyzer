@@ -3,9 +3,6 @@
 // found in the LICENSE file.
 
 'use strict';
-function get_news(DOM_content) {
-  console.log('I received the following DOM content:\n' + DOM_content);
-}
 
 // chrome.runtime.onInstalled.addListener(function() {
 //   chrome.storage.sync.set({color: '#3aa757'}, function() {
@@ -20,7 +17,7 @@ function get_news(DOM_content) {
   //   //       actions: [new chrome.declarativeContent.ShowPageAction()]
   //   // }]);
   // });
-});
+// });
 
 console.log("hi");
 
