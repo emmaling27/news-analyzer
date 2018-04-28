@@ -46,7 +46,7 @@ the API response, editing `popup.html` to display information on the source and
 bias of the content.
 
 ## Troubleshooting
-`test_fakebox.html` and `test_fakebox.js` are designed to test to make sure
+In the `test` directory, `test_fakebox.html` and `test_fakebox.js` are designed to test to make sure
 Fakebox is up and running.  If you open `test_fakebox.html` and see the word
 "nothing" on the page, Fakebox is not working.  If you see the word "something",
 Fakebox is working. The script `test_fakebox.js` sends
