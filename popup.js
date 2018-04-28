@@ -7,6 +7,7 @@
 document.getElementById("loader").style.display = "none";
 document.getElementById("results").style.display = "none";
 
+// Write message describing the source based on Fakebox domain categories
 function sourceMessage(type) {
   let message;
   if (type != "unsure" && type != "unknown") {
@@ -28,6 +29,7 @@ function sourceMessage(type) {
   return message;
 }
 
+// Translate bias decision into understandable language
 function biasMessage(bias) {
   let message;
   if (bias == "bias") {
@@ -47,8 +49,8 @@ document.getElementById('analyzeArticle').onclick = function(element) {
   document.getElementById("loader").style.display = "block";
   let url = "";
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    // Send message to content script to get content from page
     chrome.tabs.sendMessage(tabs[0].id, {msg: "Get article"}, function(response) {
-      // Print processed html (article to be analyzed) to the console
       url = tabs[0].url;
       // Send data to Fakebox
       let xhttp = new XMLHttpRequest();
