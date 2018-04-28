@@ -51,4 +51,4 @@ Fakebox is up and running.  If you open `test_fakebox.html` and see the word
 "nothing" on the page, Fakebox is not working.  If you see the word "something",
 Fakebox is working. The script `test_fakebox.js` sends
 an XMLHttpRequest to Fakebox with article content and should change "nothing" to
- "something" in `test_fakebox.html`.
+ the JSON response in `test_fakebox.html`.

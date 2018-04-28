@@ -47,18 +47,16 @@ function biasMessage(bias) {
 document.getElementById('analyzeArticle').onclick = function(element) {
   // Show the loader
   document.getElementById("loader").style.display = "block";
-  let url = "";
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     // Send message to content script to get content from page
     chrome.tabs.sendMessage(tabs[0].id, {msg: "Get article"}, function(response) {
-      url = tabs[0].url;
       // Send data to Fakebox
       let xhttp = new XMLHttpRequest();
       xhttp.open("POST", "http://localhost:8080/fakebox/check", true);
       xhttp.setRequestHeader("Accept", "application/json; charset=utf-8");
       xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
       xhttp.send(JSON.stringify({
-        "url": url,
+        "url": tabs[0].url,
         "title": "",
         "content": response.response
       }));
